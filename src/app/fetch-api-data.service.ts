@@ -14,6 +14,7 @@ export class UserRegistrationService {
   // This will provide HttpClient to the entire class, making it available via this.http
   constructor(private http: HttpClient) {
   }
+
   // Making the api call for the user registration endpoint
   public userRegistration(userDetails: any): Observable<any> {
     console.log(userDetails);
@@ -21,13 +22,88 @@ export class UserRegistrationService {
       catchError(this.handleError)
     );
   }
+
   // Making the api call for the user login endpoint
-  public userLogin(user: any): Observable<any> {
-    console.log(user);
-    return this.http.post(apiUrl + 'login', user).pipe(
+  public userLogin(Username: any): Observable<any> {
+    console.log(Username);
+    return this.http.post(apiUrl + 'login', Username).pipe(
       catchError(this.handleError)
     );
   }
+
+  // Making the api call to get all movies
+  public getAllMovies(): Observable<any> {
+    return this.http.get(apiUrl + 'movies').pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // Making the api call to get a single movie
+  public getMovie(title: string): Observable<any> {
+    console.log(title);
+    return this.http.get(apiUrl + `movies/${title}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // Making the api call to get information on a director
+  public getDirector(Director: string): Observable<any> {
+    console.log(Director);
+    return this.http.get(apiUrl + `movies/director/${Director}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // Making the api call to get information on a genre
+  public getGenre(Genre: string): Observable<any> {
+    console.log(Genre);
+    return this.http.get(apiUrl + `movies/genre/${Genre}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // Making the api call to get information about the users
+  public getUsers(): Observable<any> {
+    return this.http.get(apiUrl + 'users').pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // Making the api call to get favorite movies of a user
+  // There is no endpoint for this in my api
+
+  //Add a movie to favorite movies
+  public addFavoriteMovie(Username: string, MovieID: number): Observable<any> {
+    console.log(Username, MovieID);
+    return this.http.post(apiUrl + `users/${Username}/movies/${MovieID}`, [username, movieID]).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  //edit a user
+  public editUser(Username: string, Password: any, Email: string, Birthday: date): Observable<any> {
+    console.log(Username);
+    return this.http.put(apiUrl + `users/${Username}`, [Username, Password, Email, Birthday]).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  //delete a user
+  public deleteUser(Username: string): Observable<any> {
+    console.log(Username);
+    return this.http.delete(apiUrl + `users/${Username}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  //delete a movie from the favorites list
+  public deleteFavoriteMovie(Username: string, MovieID: number): Observable<any> {
+    console.log(Username, MovieID);
+    return this.http.delete(apiUrl + `/users/${Username}/movies/${MovieID}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
 
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
