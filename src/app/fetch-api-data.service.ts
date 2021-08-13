@@ -24,7 +24,7 @@ export class UserRegistrationService {
   }
 
   // Making the api call for the user login endpoint
-  public userLogin(Username: any): Observable<any> {
+  public userLogin(Username: string): Observable<any> {
     console.log(Username);
     return this.http.post(apiUrl + 'login', Username).pipe(
       catchError(this.handleError)
@@ -73,7 +73,7 @@ export class UserRegistrationService {
   // There is no endpoint for this in my api
 
   //Add a movie to favorite movies
-  public addFavoriteMovie(Username: string, MovieID: number): Observable<any> {
+  public addFavoriteMovie(Username: string, MovieID: string): Observable<any> {
     console.log(Username, MovieID);
     return this.http.post(apiUrl + `users/${Username}/movies/${MovieID}`, [username, movieID]).pipe(
       catchError(this.handleError)
@@ -81,7 +81,7 @@ export class UserRegistrationService {
   }
 
   //edit a user
-  public editUser(Username: string, Password: any, Email: string, Birthday: date): Observable<any> {
+  public editUser(Username: string, Password: any, Email: string, Birthday: string): Observable<any> {
     console.log(Username);
     return this.http.put(apiUrl + `users/${Username}`, [Username, Password, Email, Birthday]).pipe(
       catchError(this.handleError)
@@ -97,7 +97,7 @@ export class UserRegistrationService {
   }
 
   //delete a movie from the favorites list
-  public deleteFavoriteMovie(Username: string, MovieID: number): Observable<any> {
+  public deleteFavoriteMovie(Username: string, MovieID: string): Observable<any> {
     console.log(Username, MovieID);
     return this.http.delete(apiUrl + `/users/${Username}/movies/${MovieID}`).pipe(
       catchError(this.handleError)
