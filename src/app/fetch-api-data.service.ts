@@ -24,9 +24,9 @@ export class UserRegistrationService {
   }
 
   // Making the api call for the user login endpoint
-  public userLogin(Username: string): Observable<any> {
-    console.log(Username);
-    return this.http.post(apiUrl + 'login', Username).pipe(
+  public userLogin(userDetails: any): Observable<any> {
+    console.log(Userdetails);
+    return this.http.post(apiUrl + 'login', userDetails).pipe(
       catchError(this.handleError)
     );
   }
