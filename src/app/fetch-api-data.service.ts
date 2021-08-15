@@ -73,9 +73,9 @@ export class UserRegistrationService {
   // There is no endpoint for this in my api
 
   //Add a movie to favorite movies
-  public addFavoriteMovie(Username: string, MovieID: string): Observable<any> {
+  public addFavoriteMovie(Username: string, movieID: string): Observable<any> {
     console.log(Username, MovieID);
-    return this.http.post(apiUrl + `users/${Username}/movies/${MovieID}`, [username, movieID]).pipe(
+    return this.http.post(apiUrl + `users/${Username}/movies/${MovieID}`, [Username, movieID]).pipe(
       catchError(this.handleError)
     );
   }
