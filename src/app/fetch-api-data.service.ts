@@ -33,7 +33,12 @@ export class UserRegistrationService {
 
   // Making the api call to get all movies
   public getAllMovies(): Observable<any> {
-    return this.http.get(apiUrl + 'movies').pipe(
+    const token = localStorage.getItem('token');
+    return this.http.get(apiUrl + 'movies', {headers: new HttpHeaders(
+      {
+        Authorization: 'Bearer ' + token,
+      })
+    }).pipe(
       catchError(this.handleError)
     );
   }
