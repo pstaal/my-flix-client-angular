@@ -74,8 +74,8 @@ export class UserRegistrationService {
 
   //Add a movie to favorite movies
   public addFavoriteMovie(Username: string, movieID: string): Observable<any> {
-    console.log(Username, MovieID);
-    return this.http.post(apiUrl + `users/${Username}/movies/${MovieID}`, [Username, movieID]).pipe(
+    console.log(Username, movieID);
+    return this.http.post(apiUrl + `users/${Username}/movies/${movieID}`, [Username, movieID]).pipe(
       catchError(this.handleError)
     );
   }
