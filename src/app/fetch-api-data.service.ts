@@ -53,8 +53,14 @@ export class UserRegistrationService {
 
   // Making the api call to get information on a director
   public getDirector(Director: string): Observable<any> {
+    const token = localStorage.getItem('token');
     console.log(Director);
-    return this.http.get(apiUrl + `movies/director/${Director}`).pipe(
+    return this.http.get(apiUrl + `movies/director/${Director}`,{
+      headers: new HttpHeaders(
+        {
+          Authorization: 'Bearer ' + token,
+        })
+    }).pipe(
       catchError(this.handleError)
     );
   }

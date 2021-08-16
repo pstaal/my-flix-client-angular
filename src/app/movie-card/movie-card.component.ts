@@ -22,4 +22,9 @@ getMovies(): void {
       return this.movies;
     });
   }
+  getDirector(director: string): void {
+  this.fetchApiData.getDirector(director).subscribe((resp: any) => {
+    
+  });
+}
 }
