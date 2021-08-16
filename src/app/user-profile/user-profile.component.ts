@@ -4,8 +4,8 @@ import { Component, OnInit } from '@angular/core';
 
 // This import brings in the API calls we created in 6.2
 import { UserRegistrationService } from '../fetch-api-data.service';
-
-import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { UserLoginFormComponent } from '../user-login-form/user-login-form.component';
 
 @Component({
   selector: 'app-user-profile-form',
@@ -18,13 +18,19 @@ user = {Username: '', Password: '', Email: '', Birthday: ''};
 
 constructor(
     public fetchApiData: UserRegistrationService,
-    public router: Router
+    public dialog: MatDialog
     ) { }
 
 ngOnInit(): void {
   console.log('inside init before getuser', this.user);
   this.getUser();
   console.log('inside init after getuser', this.user);
+}
+
+openUserLoginDialog(): void {
+  this.dialog.open(UserLoginFormComponent, {
+    width: '280px'
+  });
 }
 
 getUser(): void {
@@ -42,7 +48,7 @@ getUser(): void {
 editUser(): void {
     this.fetchApiData.editUser(this.user).subscribe((result) => {
   // Logic for a successful user registration goes here! (To be implemented)
-  this.router.navigate(['login']);
+   this.openUserLoginDialog();
   })
 
   }

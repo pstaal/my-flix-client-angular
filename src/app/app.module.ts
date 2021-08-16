@@ -25,7 +25,6 @@ const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
   { path: 'profile', component: UserProfileComponent },
-  { path: 'login', component: UserLoginFormComponent},
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
 
