@@ -27,9 +27,9 @@ ngOnInit(): void {
 }
 
 getUser(): void {
-  const Username = localStorage.getItem('user');
+  const Username = localStorage.getItem('username');
   console.log('the username for fetch', Username);
-  this.fetchApiData.getUser(Username).subscribe((result) => {
+  this.fetchApiData.getUser(Username as string).subscribe((result) => {
 // Logic for a successful user registration goes here! (To be implemented)
    console.log('result from fetch', result);
    this.user = result;
