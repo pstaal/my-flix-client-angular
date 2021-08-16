@@ -1,6 +1,8 @@
 // src/app/movie-card/movie-card.component.ts
 import { Component, OnInit } from '@angular/core';
 import { UserRegistrationService } from '../fetch-api-data.service'
+import { MatDialog } from '@angular/material/dialog';
+import { DirectorView } from '../director-view/director-view.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -9,7 +11,10 @@ import { UserRegistrationService } from '../fetch-api-data.service'
 })
 export class MovieCardComponent {
   movies: any[] = [];
-  constructor(public fetchApiData: UserRegistrationService) { }
+  constructor (
+  public fetchApiData: UserRegistrationService,
+  public dialog: MatDialog )
+  { }
 
 ngOnInit(): void {
   this.getMovies();
@@ -24,7 +29,11 @@ getMovies(): void {
   }
   getDirector(director: string): void {
   this.fetchApiData.getDirector(director).subscribe((resp: any) => {
-    
+    this.dialog.open(DirectorView, { data : {
+      Name: resp.Name,
+      Bio: resp.Bio,
+      Birth: resp.Birth
+    }})
   });
 }
 }

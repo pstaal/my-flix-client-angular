@@ -15,7 +15,7 @@
           <button
               mat-button
               color="primary"
-              click={{getDirector(movie.Director.name)}}
+              (click)="getDirector(movie.Director.name)"
           >
               Director
           </button>
