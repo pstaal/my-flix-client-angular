@@ -21,13 +21,19 @@ constructor(
     ) { }
 
 ngOnInit(): void {
-  this.getUser;
+  console.log('inside init before getuser', this.user);
+  this.getUser();
+  console.log('inside init after getuser', this.user);
 }
 
 getUser(): void {
-  this.fetchApiData.getUser().subscribe((result) => {
+  const Username = localStorage.getItem('user');
+  console.log('the username for fetch', Username);
+  this.fetchApiData.getUser(Username).subscribe((result) => {
 // Logic for a successful user registration goes here! (To be implemented)
+   console.log('result from fetch', result);
    this.user = result;
+   console.log('inside getuser', this.user);
   });
 }
 
@@ -36,6 +42,7 @@ editUser(): void {
     this.fetchApiData.editUser(this.user).subscribe((result) => {
   // Logic for a successful user registration goes here! (To be implemented)
      console.log(result);
-  }
+  })
 
   }
+}

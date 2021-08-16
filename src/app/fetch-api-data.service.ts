@@ -100,9 +100,8 @@ export class UserRegistrationService {
   }
 
    //get a user
-   public getUser(): Observable<any> {
+   public getUser(Username): Observable<any> {
     const token = localStorage.getItem('token');
-    const Username = localStorage.getItem('user');
     return this.http.get(apiUrl + `users/${Username}`, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
