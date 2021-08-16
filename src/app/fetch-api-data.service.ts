@@ -86,9 +86,28 @@ export class UserRegistrationService {
   }
 
   //edit a user
-  public editUser(Username: string, Password: any, Email: string, Birthday: string): Observable<any> {
-    console.log(Username);
-    return this.http.put(apiUrl + `users/${Username}`, [Username, Password, Email, Birthday]).pipe(
+  public editUser(user: {}): Observable<any> {
+    const token = localStorage.getItem('token');
+    const Username = localStorage.getItem('user');
+    return this.http.put(apiUrl + `users/${Username}`, user, {
+      headers: new HttpHeaders(
+        {
+          Authorization: 'Bearer ' + token,
+        })
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+   //get a user
+   public getUser(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const Username = localStorage.getItem('user');
+    return this.http.get(apiUrl + `users/${Username}`, {headers: new HttpHeaders(
+      {
+        Authorization: 'Bearer ' + token,
+      })
+    }).pipe(
       catchError(this.handleError)
     );
   }
