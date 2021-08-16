@@ -18,8 +18,7 @@ user = {Username: '', Password: '', Email: '', Birthday: ''};
 
 constructor(
     public fetchApiData: UserRegistrationService,
-    public dialogRef: MatDialogRef<UserProfileComponent>,
-    public snackBar: MatSnackBar) { }
+    ) { }
 
 ngOnInit(): void {
   this.getUser;
