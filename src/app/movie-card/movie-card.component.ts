@@ -49,7 +49,7 @@ getGenre(genre: string): void {
 }
 
 getSynopsis(synopsis: string): void {
-    this.dialog.open(SynopsisView, { data : {
+    this.dialog.open(Synopsisview, { data : {
       Description: synopsis
     }})
 }
