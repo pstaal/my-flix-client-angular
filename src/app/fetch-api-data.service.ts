@@ -90,9 +90,16 @@ export class UserRegistrationService {
   // There is no endpoint for this in my api
 
   //Add a movie to favorite movies
-  public addFavoriteMovie(Username: string, movieID: string): Observable<any> {
+  public addFavoriteMovie(movieID: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const Username = localStorage.getItem('username');
     console.log(Username, movieID);
-    return this.http.post(apiUrl + `users/${Username}/movies/${movieID}`, [Username, movieID]).pipe(
+    return this.http.post(apiUrl + `users/${Username}/movies/${movieID}`,{
+      headers: new HttpHeaders(
+        {
+          Authorization: 'Bearer ' + token,
+        })
+    }).pipe(
       catchError(this.handleError)
     );
   }

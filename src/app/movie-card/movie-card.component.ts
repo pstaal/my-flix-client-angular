@@ -29,6 +29,7 @@ getMovies(): void {
       return this.movies;
     });
   }
+
   getDirector(director: string): void {
   this.fetchApiData.getDirector(director).subscribe((resp: any) => {
     this.dialog.open(DirectorView, { data : {
@@ -52,6 +53,13 @@ getSynopsis(synopsis: string): void {
     this.dialog.open(Synopsisview, { data : {
       Description: synopsis
     }})
+}
+
+addFavorite(movieID: string): void {
+  this.fetchApiData.addFavorite(movieID).subscribe((resp: any) => {
+    console.log(resp);
+  });
+
 }
 
 }
