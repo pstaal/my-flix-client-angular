@@ -94,6 +94,8 @@ export class UserRegistrationService {
     const token = localStorage.getItem('token');
     const Username = localStorage.getItem('username');
     console.log(Username, movieID);
+    console.log(token);
+    console.log(apiUrl + `users/${Username}/movies/${movieID}`);
     return this.http.post(apiUrl + `users/${Username}/movies/${movieID}`,{
       headers: new HttpHeaders(
         {

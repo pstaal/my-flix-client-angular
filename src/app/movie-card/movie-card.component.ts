@@ -56,7 +56,7 @@ getSynopsis(synopsis: string): void {
 }
 
 addFavorite(movieID: string): void {
-  this.fetchApiData.addFavorite(movieID).subscribe((resp: any) => {
+  this.fetchApiData.addFavoriteMovie(movieID).subscribe((resp: any) => {
     console.log(resp);
   });
 
