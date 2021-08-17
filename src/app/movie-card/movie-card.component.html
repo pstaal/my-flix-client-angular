@@ -34,6 +34,7 @@
         </mat-icon>
         <mat-icon
         *ngIf="user.FavoriteMovies.includes(movie._id)"
+        (click)="deleteFavorite(movie._id)"
         >favorite
       </mat-icon>
       </mat-card-actions>

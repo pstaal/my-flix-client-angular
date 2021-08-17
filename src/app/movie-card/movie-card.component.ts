@@ -73,4 +73,11 @@ addFavorite(movieID: string): void {
 
 }
 
+deleteFavorite(movieID: string): void {
+  this.fetchApiData.deleteFavoriteMovie(movieID).subscribe((resp: any) => {
+    console.log(resp);
+  });
+
+}
+
 }

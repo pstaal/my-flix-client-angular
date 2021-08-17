@@ -139,9 +139,14 @@ export class UserRegistrationService {
   }
 
   //delete a movie from the favorites list
-  public deleteFavoriteMovie(Username: string, MovieID: string): Observable<any> {
-    console.log(Username, MovieID);
-    return this.http.delete(apiUrl + `/users/${Username}/movies/${MovieID}`).pipe(
+  public deleteFavoriteMovie(MovieID: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const Username = localStorage.getItem('username');
+    return this.http.delete(apiUrl + `/users/${Username}/movies/${MovieID}`, {headers: new HttpHeaders(
+      {
+        Authorization: 'Bearer ' + token,
+      })
+    }).pipe(
       catchError(this.handleError)
     );
   }
