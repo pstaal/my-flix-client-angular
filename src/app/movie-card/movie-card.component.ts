@@ -4,6 +4,7 @@ import { UserRegistrationService } from '../fetch-api-data.service'
 import { MatDialog } from '@angular/material/dialog';
 import { DirectorView } from '../director-view/director-view.component';
 import { GenreView } from '../genre-view/genre-view.component';
+import { Synopsisview } from '../synopsisview/synopsisview.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -45,6 +46,12 @@ getGenre(genre: string): void {
       Description: resp
     }})
   });
+}
+
+getSynopsis(synopsis: string): void {
+    this.dialog.open(SynopsisView, { data : {
+      Description: synopsis
+    }})
 }
 
 }

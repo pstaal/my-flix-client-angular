@@ -22,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DirectorView } from './director-view/director-view.component';
 import { GenreView } from './genre-view/genre-view.component';
+import { Synopsisview } from './synopsisview/synopsisview.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -39,7 +40,8 @@ const appRoutes: Routes = [
     WelcomePageComponent,
     UserProfileComponent,
     DirectorView,
-    GenreView
+    GenreView,
+    Synopsisview
   ],
   imports: [
     BrowserModule,
