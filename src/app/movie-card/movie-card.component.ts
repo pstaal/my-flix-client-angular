@@ -1,5 +1,5 @@
 // src/app/movie-card/movie-card.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UserRegistrationService } from '../fetch-api-data.service'
 import { MatDialog } from '@angular/material/dialog';
 import { DirectorView } from '../director-view/director-view.component';
@@ -11,9 +11,10 @@ import { Synopsisview } from '../synopsisview/synopsisview.component';
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.scss']
 })
-export class MovieCardComponent {
-  movies: any[] = [];
-  user: any = {};
+export class MovieCardComponent implements OnInit {
+   movies: any[] = [];
+   user: any = {};
+
   constructor (
   public fetchApiData: UserRegistrationService,
   public dialog: MatDialog )
