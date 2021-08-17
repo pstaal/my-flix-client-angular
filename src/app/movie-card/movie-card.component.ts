@@ -13,6 +13,7 @@ import { Synopsisview } from '../synopsisview/synopsisview.component';
 })
 export class MovieCardComponent {
   movies: any[] = [];
+  user: any = {};
   constructor (
   public fetchApiData: UserRegistrationService,
   public dialog: MatDialog )
@@ -20,6 +21,7 @@ export class MovieCardComponent {
 
 ngOnInit(): void {
   this.getMovies();
+  this.getUser();
 }
 
 getMovies(): void {
@@ -29,6 +31,15 @@ getMovies(): void {
       return this.movies;
     });
   }
+
+  getUser(): void {
+    this.fetchApiData.getUser().subscribe((resp: any) => {
+        this.user = resp;
+        console.log(this.user);
+        return this.user;
+      });
+    }
+
 
   getDirector(director: string): void {
   this.fetchApiData.getDirector(director).subscribe((resp: any) => {

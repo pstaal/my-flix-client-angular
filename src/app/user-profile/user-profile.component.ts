@@ -22,9 +22,7 @@ constructor(
     ) { }
 
 ngOnInit(): void {
-  console.log('inside init before getuser', this.user);
   this.getUser();
-  console.log('inside init after getuser', this.user);
 }
 
 openUserLoginDialog(): void {
@@ -34,13 +32,8 @@ openUserLoginDialog(): void {
 }
 
 getUser(): void {
-  const Username = localStorage.getItem('username');
-  console.log('the username for fetch', Username);
-  this.fetchApiData.getUser(Username as string).subscribe((result) => {
-// Logic for a successful user registration goes here! (To be implemented)
-   console.log('result from fetch', result);
+  this.fetchApiData.getUser().subscribe((result) => {
    this.user = result;
-   console.log('inside getuser', this.user);
   });
 }
 
