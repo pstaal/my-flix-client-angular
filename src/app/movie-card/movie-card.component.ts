@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserRegistrationService } from '../fetch-api-data.service'
 import { MatDialog } from '@angular/material/dialog';
 import { DirectorView } from '../director-view/director-view.component';
+import { GenreView } from '../genre-view/genre-view.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -36,4 +37,14 @@ getMovies(): void {
     }})
   });
 }
+
+getGenre(genre: string): void {
+  this.fetchApiData.getGenre(genre).subscribe((resp: any) => {
+    this.dialog.open(GenreView, { data : {
+      Name: genre,
+      Description: resp
+    }})
+  });
+}
+
 }

@@ -67,8 +67,14 @@ export class UserRegistrationService {
 
   // Making the api call to get information on a genre
   public getGenre(Genre: string): Observable<any> {
+    const token = localStorage.getItem('token');
     console.log(Genre);
-    return this.http.get(apiUrl + `movies/genre/${Genre}`).pipe(
+    return this.http.get(apiUrl + `movies/genre/${Genre}`,{
+      headers: new HttpHeaders(
+        {
+          Authorization: 'Bearer ' + token,
+        })
+    }).pipe(
       catchError(this.handleError)
     );
   }
