@@ -14,6 +14,7 @@ import { Synopsisview } from '../synopsisview/synopsisview.component';
 export class MovieCardComponent implements OnInit {
    movies: any[] = [];
    user: any = {};
+   favoriteMovieIds: any[] = [];
 
   constructor (
   public fetchApiData: UserRegistrationService,
@@ -28,7 +29,6 @@ ngOnInit(): void {
 getMovies(): void {
   this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
-      console.log(this.movies);
       return this.movies;
     });
   }
@@ -36,8 +36,8 @@ getMovies(): void {
   getUser(): void {
     this.fetchApiData.getUser().subscribe((resp: any) => {
         this.user = resp;
-        console.log(this.user);
-        return this.user;
+        this.favoriteMovieIds = resp.FavoriteMovies;
+        return this.user, this.favoriteMovieIds;
       });
     }
 
@@ -67,16 +67,21 @@ getSynopsis(synopsis: string): void {
     }})
 }
 
+isFavorite(movieID: string): boolean {
+ return this.favoriteMovieIds.includes(movieID);
+};
+
 addFavorite(movieID: string): void {
   this.fetchApiData.addFavoriteMovie(movieID).subscribe((resp: any) => {
-    console.log(resp);
+    return this.favoriteMovieIds.push(movieID);
   });
 
 }
 
 deleteFavorite(movieID: string): void {
   this.fetchApiData.deleteFavoriteMovie(movieID).subscribe((resp: any) => {
-    console.log(resp);
+    const index = this.favoriteMovieIds.indexOf(movieID);
+    return this.favoriteMovieIds.splice(index, 1);
   });
 
 }
