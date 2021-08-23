@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DirectorView } from '../director-view/director-view.component';
 import { GenreView } from '../genre-view/genre-view.component';
 import { Synopsisview } from '../synopsisview/synopsisview.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-movie-card',
@@ -18,7 +19,9 @@ export class MovieCardComponent implements OnInit {
 
   constructor (
   public fetchApiData: UserRegistrationService,
-  public dialog: MatDialog )
+  public dialog: MatDialog,
+  public snackBar: MatSnackBar
+  )
   { }
 
 ngOnInit(): void {
@@ -73,6 +76,9 @@ isFavorite(movieID: string): boolean {
 
 addFavorite(movieID: string): void {
   this.fetchApiData.addFavoriteMovie(movieID).subscribe((resp: any) => {
+    this.snackBar.open('Added to favorites!', 'Ok', {
+      duration: 2000,
+    });
     return this.favoriteMovieIds.push(movieID);
   });
 
@@ -80,6 +86,9 @@ addFavorite(movieID: string): void {
 
 deleteFavorite(movieID: string): void {
   this.fetchApiData.deleteFavoriteMovie(movieID).subscribe((resp: any) => {
+    this.snackBar.open('Removed from favorites!', 'Ok', {
+      duration: 2000,
+    });
     const index = this.favoriteMovieIds.indexOf(movieID);
     return this.favoriteMovieIds.splice(index, 1);
   });
