@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserRegistrationService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { UserLoginFormComponent } from '../user-login-form/user-login-form.component';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-profile-form',
@@ -18,7 +20,9 @@ user = {Username: '', Password: '', Email: '', Birthday: ''};
 
 constructor(
     public fetchApiData: UserRegistrationService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public router: Router,
+    public snackBar: MatSnackBar
     ) { }
 
 ngOnInit(): void {
@@ -29,6 +33,14 @@ openUserLoginDialog(): void {
   this.dialog.open(UserLoginFormComponent, {
     width: '280px'
   });
+}
+
+logOut(): void {
+  this.snackBar.open('Logging out..', 'Ok', {
+    duration: 2000,
+  });
+  localStorage.clear();
+  this.router.navigate(['welcome']);
 }
 
 getUser(): void {

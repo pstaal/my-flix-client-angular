@@ -6,6 +6,7 @@ import { DirectorView } from '../director-view/director-view.component';
 import { GenreView } from '../genre-view/genre-view.component';
 import { Synopsisview } from '../synopsisview/synopsisview.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-card',
@@ -20,7 +21,8 @@ export class MovieCardComponent implements OnInit {
   constructor (
   public fetchApiData: UserRegistrationService,
   public dialog: MatDialog,
-  public snackBar: MatSnackBar
+  public snackBar: MatSnackBar,
+  public router: Router
   )
   { }
 
@@ -43,7 +45,14 @@ getMovies(): void {
         return this.user, this.favoriteMovieIds;
       });
     }
-
+  
+  logOut(): void {
+    this.snackBar.open('Logging out..', 'Ok', {
+      duration: 2000,
+    });
+    localStorage.clear();
+    this.router.navigate(['welcome']);
+  }
 
   getDirector(director: string): void {
   this.fetchApiData.getDirector(director).subscribe((resp: any) => {
