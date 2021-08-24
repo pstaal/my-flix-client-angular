@@ -45,7 +45,8 @@ logOut(): void {
 
 getUser(): void {
   this.fetchApiData.getUser().subscribe((result) => {
-   this.user = result;
+   console.log(result);
+   this.user = { Username: result.Username, Password: 'Petertje', Email: result.Email, Birthday: result.Birthday };
   });
 }
 
