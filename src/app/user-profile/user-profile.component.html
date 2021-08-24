@@ -6,12 +6,8 @@
       <li class="nav-item" style="margin: 0 30px;"><a class="nav-link" (click)="logOut()">Log out</a></li>
   </ul>
 </nav>
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>My Profile</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <form>
+<div style="width: 20%; display:flex; flex-direction: column; position: absolute; top: 40%;left: 40%;">
+    <h1>My Profile</h1>
       <mat-form-field>
         <input
           matInput
@@ -51,15 +47,10 @@
           name="Birthday"
         >
       </mat-form-field>
-    </form>
-  </mat-card-content>
-  <mat-card-actions>
       <button
-        mat-raised-button
+        class="btn btn-primary"
         (click)="editUser()"
-        color="primary"
       >
         Save my details!
       </button>
-  </mat-card-actions>
-</mat-card>
+    </div>
