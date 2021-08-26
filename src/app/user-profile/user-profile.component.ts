@@ -8,6 +8,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { UserLoginFormComponent } from '../user-login-form/user-login-form.component';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { GenreView } from '../genre-view/genre-view.component';
+import { Synopsisview } from '../synopsisview/synopsisview.component';
+import { DirectorView } from '../director-view/director-view.component';
 
 @Component({
   selector: 'app-user-profile-form',
@@ -40,6 +43,32 @@ logOut(): void {
   this.router.navigate(['welcome']);
 }
 
+getGenre(genre: string): void {
+  this.fetchApiData.getGenre(genre).subscribe((resp: any) => {
+    this.dialog.open(GenreView, { data : {
+      Name: genre,
+      Description: resp
+    }})
+  });
+}
+
+getDirector(director: string): void {
+  this.fetchApiData.getDirector(director).subscribe((resp: any) => {
+    this.dialog.open(DirectorView, { data : {
+      Name: resp.Name,
+      Bio: resp.Bio,
+      Birth: resp.Birth
+    }})
+  });
+}
+
+getSynopsis(synopsis: string): void {
+    this.dialog.open(Synopsisview, { data : {
+      Description: synopsis
+    }})
+}
+
+
 getUser(): void {
   this.fetchApiData.getUser().subscribe((result) => {
    console.log(result);
@@ -50,8 +79,9 @@ getUser(): void {
 
 getFavMovies(): void {
   this.fetchApiData.getAllMovies().subscribe((resp: any) => {
-      this.movies = resp.filter(function (item) {
-        return this.favoriteMovieIds.indexOf(item._id) > -1;
+     let favs = this.favoriteMovieIds;
+      this.movies = resp.filter(function (item: any) {
+        return favs.indexOf(item._id) > -1;
       });
       return this.movies;
     });
