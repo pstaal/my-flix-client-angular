@@ -29,12 +29,6 @@ ngOnInit(): void {
   this.getUser();
 }
 
-openUserLoginDialog(): void {
-  this.dialog.open(UserLoginFormComponent, {
-    width: '280px'
-  });
-}
-
 logOut(): void {
   this.snackBar.open('Logging out..', 'Ok', {
     duration: 2000,
@@ -54,7 +48,7 @@ getUser(): void {
 editUser(): void {
     this.fetchApiData.editUser(this.user).subscribe((result) => {
   // Logic for a successful user registration goes here! (To be implemented)
-   this.openUserLoginDialog();
+  this.router.navigate(['welcome']);
   })
 
   }
