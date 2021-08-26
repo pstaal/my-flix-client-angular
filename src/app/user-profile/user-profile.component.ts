@@ -17,6 +17,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class UserProfileComponent implements OnInit {
 
 user = {Username: '', Password: '', Email: '', Birthday: ''};
+favoriteMovieIds: any[] = [];
+movies: any[] = [];
 
 constructor(
     public fetchApiData: UserRegistrationService,
@@ -27,6 +29,7 @@ constructor(
 
 ngOnInit(): void {
   this.getUser();
+  this.getFavMovies();
 }
 
 logOut(): void {
@@ -41,8 +44,30 @@ getUser(): void {
   this.fetchApiData.getUser().subscribe((result) => {
    console.log(result);
    this.user = { Username: result.Username, Password: 'Petertje', Email: result.Email, Birthday: result.Birthday };
+   this.favoriteMovieIds = result.FavoriteMovies;
   });
 }
+
+getFavMovies(): void {
+  this.fetchApiData.getAllMovies().subscribe((resp: any) => {
+      this.movies = resp.filter(function (item) {
+        return this.favoriteMovieIds.indexOf(item._id) > -1;
+      });
+      return this.movies;
+    });
+  }
+
+  deleteFavorite(movieID: string): void {
+    this.fetchApiData.deleteFavoriteMovie(movieID).subscribe((resp: any) => {
+      this.snackBar.open('Removed from favorites!', 'Ok', {
+        duration: 2000,
+      });
+      const index = this.favoriteMovieIds.indexOf(movieID);
+      this.getFavMovies();
+      return this.favoriteMovieIds.splice(index, 1);
+    });
+  
+  }
 
 // This is the function responsible for sending the form inputs to the backend
 editUser(): void {
